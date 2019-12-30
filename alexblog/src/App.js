@@ -5,6 +5,7 @@ import Dashboard from './components/dashboard/Dashboard'
 import ArticleDetails from './components/articles/ArticleDetails'
 import SignIn from './components/auth/SignIn'
 import Register from './components/auth/Register'
+import CreateArticle from './components/articles/CreateArticle'
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
             <Route path='/article/:id' component={ArticleDetails} />
             <Route path='/signin' component={SignIn} />
             <Route path='/register' component={Register} />
+            <Route path='/create' component={CreateArticle} />
           </Switch>
         </div>
       </BrowserRouter>
