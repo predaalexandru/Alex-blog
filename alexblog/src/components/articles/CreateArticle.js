@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import {createArticle} from '../../store/actions/articleActions'
 
 class CreateArticle extends Component {
   state = {
@@ -14,7 +16,8 @@ class CreateArticle extends Component {
   handleSubmit = (e) => {
     //preventDefault action of the form submitted when page is refreshed
     e.preventDefault();
-    console.log(this.state);
+    //console.log(this.state);
+    this.props.createArticle(this.state)
   }
   render() {
     return (
@@ -38,4 +41,11 @@ class CreateArticle extends Component {
   }
 }
 
-export default CreateArticle
+//function that access some data from reducers
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createArticle: (article) => dispatch(createArticle(article))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CreateArticle)
