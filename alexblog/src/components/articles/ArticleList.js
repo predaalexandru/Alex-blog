@@ -1,5 +1,6 @@
 import React from 'react'
 import ArticleSummary from './ArticleSummary'
+import { Link } from 'react-router-dom'
 
 const ArticleList = ({articles}) => {
   return (
@@ -7,7 +8,9 @@ const ArticleList = ({articles}) => {
       {/* we map the articles */}
     { articles && articles.map(article => {
       return (
-        <ArticleSummary article={article} key={article.id} />
+        <Link to={'/article/' + article.id} key={article.id}>
+          <ArticleSummary article={article} />
+        </Link>
       )
     })}  
   </div>
