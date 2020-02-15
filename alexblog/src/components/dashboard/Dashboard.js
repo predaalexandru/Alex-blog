@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ArticleList from '../articles/ArticleList'
 import Notifications from './Notifications'
 import {connect} from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 
 class Dashboard extends Component {
   render() {
@@ -26,8 +28,15 @@ class Dashboard extends Component {
 //function that access some data from reducers
 const mapStateToProps = (state) => {
   return {
-    articles: state.article.articles
+    articles: state.firestore.ordered.articles
   }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+//we use compose to store different enhanch togheter
+export default compose (
+  connect(mapStateToProps),
+  //with this we connect to which collection we want
+  firestoreConnect([
+    {collection: 'articles'}
+  ])
+)(Dashboard)
