@@ -6,19 +6,22 @@ const authReducer = (state = initState, action) => {
   //we use switch statement to check the action type
   switch(action.type){
     case 'LOGIN_ERROR':
-      console.log('login error');
+      console.log('Login Error');
       return {
         ...state,
         authError: 'Login failed'
       }
     case 'LOGIN_SUCCESS':
-      console.log('login success');
+      console.log('Login Success');
       return {
         authError: null
       }
+    case 'SIGNOUT_SUCCESS':
+      console.log('Signout Success');
+      return state
     default:
-      return state;
-  }
-};
+      return state
+    }
+  };
 
 export default authReducer

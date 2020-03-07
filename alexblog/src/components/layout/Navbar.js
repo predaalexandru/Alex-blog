@@ -5,7 +5,9 @@ import SignedOut from './SignedOut'
 import {connect} from 'react-redux'
 
 
-const Navbar = () => {
+const Navbar = (props) => {
+    const { auth } = props;
+    console.log(auth);
     return (
         <nav className="nav-wrapper grey darken-3"> 
          <div className="container">

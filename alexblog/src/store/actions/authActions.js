@@ -1,8 +1,8 @@
+import firebase from 'firebase'
+
 //the credentials are email and password
 export const signIn = (credentials) => {
-    return (dispatch, getState, {getFirebase}) => {
-        //we use to comunicate to firebase so that the user can login
-      const firebase = getFirebase();
+    return (dispatch, getState) => {
       
       //we use th auth services to sign in with email and password
       firebase.auth().signInWithEmailAndPassword(
@@ -14,5 +14,14 @@ export const signIn = (credentials) => {
         dispatch({ type: 'LOGIN_ERROR', err });
       });
   
+    }
+  }
+
+  export const signOut = () => {
+    return (dispatch, getState) => {
+  
+      firebase.auth().signOut().then(() => {
+        dispatch({ type: 'SIGNOUT_SUCCESS' })
+      });
     }
   }
