@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {createArticle} from '../../store/actions/articleActions'
+import { Redirect } from 'react-router-dom'
 
 class CreateArticle extends Component {
   state = {
@@ -21,6 +22,8 @@ class CreateArticle extends Component {
     this.props.history.push('/');
   }
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to='/signin' /> 
     return (
       <div className="container">
         <form className="white" onSubmit={this.handleSubmit}>
@@ -42,6 +45,12 @@ class CreateArticle extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth
+  }
+}
+
 //function that access some data from reducers
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -49,4 +58,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(CreateArticle)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateArticle)

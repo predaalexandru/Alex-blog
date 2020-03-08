@@ -4,11 +4,14 @@ import Notifications from './Notifications'
 import {connect} from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
 
 class Dashboard extends Component {
   render() {
 
-    const { articles } = this.props;
+    const { articles, auth } = this.props;
+    //if there is no uid then redirect to the signin page
+    if (!auth.uid) return <Redirect to='/signin' /> 
 
     return (
       <div className="dashboard container">
@@ -28,7 +31,8 @@ class Dashboard extends Component {
 //function that access some data from reducers
 const mapStateToProps = (state) => {
   return {
-    articles: state.firestore.ordered.articles
+    articles: state.firestore.ordered.articles,
+    auth: state.firebase.auth
   }
 }
 
