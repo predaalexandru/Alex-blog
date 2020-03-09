@@ -19,6 +19,7 @@ class CreateArticle extends Component {
     e.preventDefault();
     //console.log(this.state);
     this.props.createArticle(this.state)
+    //redirect after we create a new article
     this.props.history.push('/');
   }
   render() {
