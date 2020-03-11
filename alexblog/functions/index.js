@@ -17,7 +17,7 @@ return admin.firestore().collection('notifications')
 //function for created articles
  exports.articleCreated = functions.firestore
     .document('articles/{articleId}')
-    //whenever a new project is created inside collection then we want to fire the cobalt function
+    //whenever a new project is created inside collection then we want to fire the function
     .onCreate(doc => {
         
         //we create a new const to get the data from doc
