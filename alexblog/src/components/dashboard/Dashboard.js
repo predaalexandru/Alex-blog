@@ -42,7 +42,7 @@ export default compose (
   connect(mapStateToProps),
   //with this we connect to which collection we want
   firestoreConnect([
-    {collection: 'articles'},
-    { collection: 'notifications', limit: 3}
+    {collection: 'articles', orderBy: ['createdAt', 'desc']},
+    { collection: 'notifications', limit: 3, orderBy: ['time', 'desc']}
   ])
 )(Dashboard)
