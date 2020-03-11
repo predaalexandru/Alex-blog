@@ -20,6 +20,7 @@ return admin.firestore().collection('notifications')
     //whenever a new project is created inside collection then we want to fire the cobalt function
     .onCreate(doc => {
         
+        //we create a new const to get the data from doc
         const article = doc.data();
         const notification = {
           content: 'Added a new article',
@@ -28,4 +29,23 @@ return admin.firestore().collection('notifications')
         }
     
         return createNotification(notification);  
- })
+ });
+
+
+ exports.userJoined = functions.auth.user()
+  .onCreate(user => {
+    
+    return admin.firestore().collection('users')
+      .doc(user.uid).get().then(doc => {
+
+        //we create a new const to get the data from doc
+        const newUser = doc.data();
+        const notification = {
+          content: 'Joined the blog!',
+          user: `${newUser.firstName} ${newUser.lastName}`,
+          time: admin.firestore.FieldValue.serverTimestamp()
+        };
+
+        return createNotification(notification);
+      });
+});
